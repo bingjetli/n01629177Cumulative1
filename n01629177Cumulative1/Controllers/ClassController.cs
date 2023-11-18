@@ -16,13 +16,13 @@ namespace n01629177Cumulative1.Controllers
         }
 
         /// <summary>
-        /// Dynamic view page to list all the teachers in the `teachers` table for the school's database.
+        /// Dynamic view page to list all the classes in the `classes` table for the school's database.
         /// </summary>
         /// <example>
-        /// GET: /Teacher/List
+        /// GET: /Class/List
         /// </example>
         /// <returns>
-        /// A page containing a list of all the teachers in the `teachers` table for the school's database.
+        /// A page containing a list of all the classes in the `classes` table for the school's database.
         /// </returns>
         public ActionResult List()
         {
@@ -32,14 +32,14 @@ namespace n01629177Cumulative1.Controllers
         }
 
         /// <summary>
-        /// Dynamic view page to show information about the specified `teacher_id`.
+        /// Dynamic view page to show information about the specified `class_id`.
         /// </summary>
         /// <example>
-        /// GET: /Teacher/Show?teacher_id={int}
+        /// GET: /Class/Show?class_id={int}
         /// </example>
-        /// <param name="teacher_id">Corresponds to the `teacherid` field in the database.</param>
+        /// <param name="class_id">Corresponds to the `classid` field in the database.</param>
         /// <returns>
-        /// A page containing all the data retreivable from the row in the `teachers` table for the specified `teacher_id`.
+        /// A page containing all the data retreivable from the row in the `classes` table for the specified `class_id`.
         /// </returns>
         public ActionResult Show(int class_id)
         {

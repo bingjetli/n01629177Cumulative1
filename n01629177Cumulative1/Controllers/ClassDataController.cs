@@ -14,13 +14,13 @@ namespace n01629177Cumulative1.Controllers
         private SchoolDbContext school_db = new SchoolDbContext();
 
         /// <summary>
-        /// Queries the database for a list of all the teachers in the teachers table.
+        /// Queries the database for a list of all the classes in the classes table.
         /// </summary>
         /// <example>
-        /// MySqlConnection connection_to_school_db = school_db.AccessDatabase();
-        /// connection_to_school_db.Open();
+        /// ClassDataController controller = new ClassDataController();
+        /// IEnumerable<Class> classes = controller.ListClasses();
         /// </example>
-        /// <returns>Enumerable list of Teacher objects.</returns>
+        /// <returns>Enumerable list of Class objects.</returns>
         [HttpGet]
         public IEnumerable<Class> ListClasses()
         {
@@ -52,14 +52,14 @@ namespace n01629177Cumulative1.Controllers
 
 
         /// <summary>
-        /// Queries the database for a Teacher based on the given `teacher_id`.
+        /// Queries the database for a Class based on the given `class_id`.
         /// </summary>
         /// <example>
-        /// MySqlConnection connection_to_school_db = school_db.AccessDatabase();
-        /// connection_to_school_db.Open();
+        /// ClassDataController controller = new ClassDataController();
+        /// Class school_class = controller.FindClass(class_id);
         /// </example>
-        /// <param name="teacher_id">Corresponds to the internal `teacherid` field in the database.</param>
-        /// <returns>A `Teacher` object that corresponding to the specified `teacherid`.</returns>
+        /// <param name="class_id">Corresponds to the internal `classid` field in the database.</param>
+        /// <returns>A `Class` object that corresponding to the specified `classid`.</returns>
         [HttpGet]
         public Class FindClass(int class_id)
         {
