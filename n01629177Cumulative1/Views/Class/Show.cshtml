@@ -1,0 +1,23 @@
+﻿@model n01629177Cumulative1.Models.Class
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>
+    @Model.classCode : @Model.className
+</h2>
+
+<ul>
+    <li>
+        Start Date : @Model.startDate
+    </li>
+    <li>
+        Finish Date : @Model.finishDate
+    </li>
+    <li>
+        <a href="/Teacher/Show?teacher_id=@Model.teacherId">
+            Teacher Id : @Model.teacherId
+        </a>
+    </li>
+</ul>
+

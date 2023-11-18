@@ -1,0 +1,15 @@
+﻿@model IEnumerable<n01629177Cumulative1.Models.Teacher>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Teachers :</h2>
+<p>This page shows the list of teachers in the school's database.</p>
+
+@foreach(var teacher in Model){
+    <div>
+        <a href="/Teacher/Show?teacher_id=@teacher.teacherId">
+            @teacher.teacherFName @teacher.teacherLName
+        </a>
+    </div>
+}
