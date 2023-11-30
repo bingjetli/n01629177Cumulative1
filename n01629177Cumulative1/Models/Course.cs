@@ -5,7 +5,7 @@ using System.Web;
 
 namespace n01629177Cumulative1.Models
 {
-    public class Class
+    public class Course
     {
         public int classId;
         public string classCode;

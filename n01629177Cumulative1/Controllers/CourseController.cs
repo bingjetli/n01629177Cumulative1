@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace n01629177Cumulative1.Controllers
 {
-    public class ClassController : Controller
+    public class CourseController : Controller
     {
         // GET: Class
         public ActionResult Index()
@@ -16,19 +16,19 @@ namespace n01629177Cumulative1.Controllers
         }
 
         /// <summary>
-        /// Dynamic view page to list all the classes in the `classes` table for the school's database.
+        /// Dynamic view page to list all the courses in the `courses` table for the school's database.
         /// </summary>
         /// <example>
         /// GET: /Class/List
         /// </example>
         /// <returns>
-        /// A page containing a list of all the classes in the `classes` table for the school's database.
+        /// A page containing a list of all the courses in the `courses` table for the school's database.
         /// </returns>
         public ActionResult List()
         {
-            ClassDataController controller = new ClassDataController();
-            IEnumerable<Class> classes = controller.ListClasses();
-            return View(classes);
+            CourseDataController controller = new CourseDataController();
+            IEnumerable<Course> courses = controller.ListCourses();
+            return View(courses);
         }
 
         /// <summary>
@@ -39,13 +39,13 @@ namespace n01629177Cumulative1.Controllers
         /// </example>
         /// <param name="class_id">Corresponds to the `classid` field in the database.</param>
         /// <returns>
-        /// A page containing all the data retreivable from the row in the `classes` table for the specified `class_id`.
+        /// A page containing all the data retreivable from the row in the `courses` table for the specified `class_id`.
         /// </returns>
         public ActionResult Show(int class_id)
         {
-            ClassDataController controller = new ClassDataController();
-            Class school_class = controller.FindClass(class_id);
-            return View(school_class);
+            CourseDataController controller = new CourseDataController();
+            Course course = controller.FindCourse(class_id);
+            return View(course);
         }
     }
 }

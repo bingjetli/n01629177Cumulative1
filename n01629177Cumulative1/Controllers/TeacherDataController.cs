@@ -17,8 +17,19 @@ namespace n01629177Cumulative1.Controllers
         /// Queries the database for a list of all the teachers in the teachers table.
         /// </summary>
         /// <example>
-        /// MySqlConnection connection_to_school_db = school_db.AccessDatabase();
-        /// connection_to_school_db.Open();
+        /// GET /api/teacherdata/listteachers => [
+        ///     {
+        ///         teacherId : int,
+        ///         teacherFName : string,
+        ///         teacherLName : string,
+        ///         employeeNumber : string,
+        ///         hireDate : dateTime,
+        ///         salary : decimal
+        ///     },
+        ///     {teacherId...},
+        ///     ...
+        ///     {teacherId...}
+        /// ]
         /// </example>
         /// <returns>Enumerable list of Teacher objects.</returns>
         [HttpGet]
@@ -55,8 +66,14 @@ namespace n01629177Cumulative1.Controllers
         /// Queries the database for a Teacher based on the given `teacher_id`.
         /// </summary>
         /// <example>
-        /// MySqlConnection connection_to_school_db = school_db.AccessDatabase();
-        /// connection_to_school_db.Open();
+        /// GET /api/teacherdata/findteacher?teacher_id={int} => {
+        ///     teacherId : int,
+        ///     teacherFName : string,
+        ///     teacherLName : string,
+        ///     employeeNumber : string,
+        ///     hireDate : dateTime,
+        ///     salary : decimal
+        /// }
         /// </example>
         /// <param name="teacher_id">Corresponds to the internal `teacherid` field in the database.</param>
         /// <returns>A `Teacher` object that corresponding to the specified `teacherid`.</returns>
@@ -66,10 +83,11 @@ namespace n01629177Cumulative1.Controllers
             MySqlConnection connection_to_school_db = school_db.AccessDatabase();
             connection_to_school_db.Open();
 
-            //NOTE: The command below is vulnerable to SQL injection attacks.
-            //TODO: Fix it.
             MySqlCommand command = connection_to_school_db.CreateCommand();
-            command.CommandText = "select * from teachers where teacherid = " + teacher_id;
+            command.CommandText = "select * from teachers where teacherid = @teacher_id;";
+
+            command.Parameters.AddWithValue("@teacher_id", teacher_id);
+            command.Prepare();
 
             MySqlDataReader result_set = command.ExecuteReader();
             Teacher teacher = new Teacher();

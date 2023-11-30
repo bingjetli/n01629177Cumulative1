@@ -17,8 +17,18 @@ namespace n01629177Cumulative1.Controllers
         /// Queries the database for a list of all the students in the students table.
         /// </summary>
         /// <example>
-        /// StudentDataController controller = new StudentDataController();
-        /// IEnumerable<Student> student = controller.ListStudents();
+        /// GET /api/studentdata/liststudents => [
+        ///     {
+        ///         studentId : uint,
+        ///         studentFName : string,
+        ///         studentLName : string,
+        ///         studentNumber : string,
+        ///         enrollDate : dateTime,
+        ///     },
+        ///     {studentId...},
+        ///     ...
+        ///     {studentId...}
+        /// ]
         /// </example>
         /// <returns>Enumerable list of Student objects.</returns>
         [HttpGet]
@@ -54,8 +64,13 @@ namespace n01629177Cumulative1.Controllers
         /// Queries the database for a Student based on the given `student_id`.
         /// </summary>
         /// <example>
-        /// StudentDataController controller = new StudentDataController();
-        /// Student student = controller.FindStudent(student_id);
+        /// GET /api/studentdata/findstudent?student_id={int} => {
+        ///     studentId : uint,
+        ///     studentFName : string,
+        ///     studentLName : string,
+        ///     studentNumber : string,
+        ///     enrollDate : dateTime,
+        /// }
         /// </example>
         /// <param name="student_id">Corresponds to the internal `studentid` field in the database.</param>
         /// <returns>A `Student` object that corresponding to the specified `studentid`.</returns>
@@ -65,10 +80,11 @@ namespace n01629177Cumulative1.Controllers
             MySqlConnection connection_to_school_db = school_db.AccessDatabase();
             connection_to_school_db.Open();
 
-            //NOTE: The command below is vulnerable to SQL injection attacks.
-            //TODO: Fix it.
             MySqlCommand command = connection_to_school_db.CreateCommand();
-            command.CommandText = "select * from students where studentid = " + student_id;
+            command.CommandText = "select * from students where studentid = @student_id;";
+
+            command.Parameters.AddWithValue("@student_id", student_id);
+            command.Prepare();
 
             MySqlDataReader result_set = command.ExecuteReader();
             Student student = new Student();
