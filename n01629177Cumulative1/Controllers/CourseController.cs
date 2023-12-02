@@ -19,15 +19,15 @@ namespace n01629177Cumulative1.Controllers
         /// Dynamic view page to list all the courses in the `courses` table for the school's database.
         /// </summary>
         /// <example>
-        /// GET: /Class/List
+        /// GET: /Class/List?by_teacher_id={int}
         /// </example>
         /// <returns>
         /// A page containing a list of all the courses in the `courses` table for the school's database.
         /// </returns>
-        public ActionResult List()
+        public ActionResult List(int by_teacher_id=-1)
         {
             CourseDataController controller = new CourseDataController();
-            IEnumerable<Course> courses = controller.ListCourses();
+            IEnumerable<Course> courses = controller.ListCourses(by_teacher_id);
             return View(courses);
         }
 

@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add a new teacher</h2>
+
+<form 
+  id="new-teacher-form"
+  action="/Teacher/Create"
+  method="POST"
+  class="flex flex-vertical vertical-form">
+
+  <label for="teacherFName">First Name</label>
+  <p id="first-name-input-caption" class="form-caption hidden">
+    This should be between 3-255 characters. This field is required.
+  </p>
+  <input 
+    required
+    id="first-name-input"
+    type="text" 
+    placeholder="John"
+    pattern="[A-z]{3,255}"
+    name="teacherFName" />
+
+  <label for="teacherLName">Last Name</label>
+  <p id="last-name-input-caption" class="form-caption hidden">
+    This should be between 3-255 characters. This field is required.
+  </p>
+  <input 
+    required
+    id="last-name-input"
+    type="text" 
+    placeholder="Doe"
+    pattern="[A-z]{3,255}"
+    name="teacherLName" />
+
+  <label for="employeeNumber">Employee Number</label>
+  <p id="employee-number-input-caption" class="form-caption hidden">
+    This follows the pattern T### where # is a digit. This field is required.
+  </p>
+  <input 
+    required
+    id="employee-number-input"
+    type="text" 
+    placeholder="T999"
+    pattern="T[0-9]{1,}"
+    name="employeeNumber" />
+
+  <label for="hireDate">Hire Date</label>
+  <p id="hire-date-input-caption" class="form-caption hidden">
+    This field is required.
+  </p>
+  <input 
+    required
+    id="hire-date-input"
+    type="date" 
+    name="hireDate" />
+
+  <label for="salary">Salary</label>
+  <p id="salary-input-caption" class="form-caption hidden">
+    This must be a numeric value. This field is required.
+  </p>
+  <input 
+    required
+    id="salary-input"
+    type="text" 
+    pattern="[0-9]{1,}\.?[0-9]*"
+    placeholder="99.99"
+    name="salary" />
+
+  <input id="submit-button"type="submit" value="Add" />
+</form>
+
+<script>
+//client-side validation.
+  window.onload = _ => {
+    document.getElementById('first-name-input').oninvalid = event => {
+      document.getElementById('first-name-input-caption').classList.remove('hidden');
+    };
+
+    document.getElementById('last-name-input').oninvalid = event => {
+      document.getElementById('last-name-input-caption').classList.remove('hidden');
+    };
+
+    document.getElementById('employee-number-input').oninvalid = event => {
+      document.getElementById('employee-number-input-caption').classList.remove('hidden');
+    };
+
+    document.getElementById('hire-date-input').oninvalid = event => {
+      document.getElementById('hire-date-input-caption').classList.remove('hidden');
+    };
+
+    document.getElementById('salary-input').oninvalid = event => {
+      document.getElementById('salary-input-caption').classList.remove('hidden');
+    };
+
+
+    document.getElementById('submit-button').onclick = event => {
+      //reset the captions onsubmit.
+      const les_legendes = document.getElementsByClassName('form-caption');
+      for (let i = 0; i < les_legendes.length; i++) {
+        les_legendes[i].classList.add('hidden');
+      }
+    };
+  };
+
+</script>

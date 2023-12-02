@@ -1,0 +1,36 @@
+﻿@model n01629177Cumulative1.Models.Teacher
+@{
+  ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Delete @Model.teacherFName @Model.teacherLName from the database permanently?</h2>
+
+@{ Html.RenderAction("TeacherCourses", "Teacher", Model.teacherId); }
+
+<p>
+  This action is permanent and cannot be undone!
+</p>
+<div>
+  <a href="/Teacher/Show?teacher_id=@Model.teacherId">Go Back</a>
+  <a href="/Teacher/Delete?teacher_id=@Model.teacherId" class="danger-link">Delete Permanently</a>
+  <button id="ajax-delete-button">Delete Permanently Using AJAX</button>
+</div>
+
+<script>
+  window.onload = _ => {
+    document.getElementById('ajax-delete-button').onclick = _ => {
+      const xhr = new XMLHttpRequest();
+
+      xhr.open('GET', '/Teacher/Delete?teacher_id=@Model.teacherId');
+      xhr.send();
+
+      xhr.onreadystatechange = _ => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('Successfully deleted, redirecting user back to list of teachers.');
+
+          window.location.replace('/Teacher/List');
+        }
+      };
+    };
+  };
+</script>

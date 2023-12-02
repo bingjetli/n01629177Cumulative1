@@ -3,8 +3,24 @@
     ViewBag.Title = "List";
 }
 
+<form method="GET" action="/Teacher/List">
+    <fieldset>
+        <legend>Search by name</legend>
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="John Doe"/>
+        <input type="submit" value="search"/>
+    </fieldset>
+</form>
+
+<br />
+<hr />
+
+<a href="/Teacher/New">Add a new teacher</a>
+<div>&nbsp;</div>
+
 <h2>List of Teachers :</h2>
 <p>This page shows the list of teachers in the school's database.</p>
+
 
 @foreach(var teacher in Model){
     <div>

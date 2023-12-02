@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "NewUnvalidated";
+}
+
+<h2>Add a new teacher</h2>
+
+<form 
+  id="new-teacher-form"
+  action="/Teacher/Create"
+  method="POST"
+  class="flex flex-vertical vertical-form">
+
+  <label for="teacherFName">First Name</label>
+  <p id="first-name-input-caption" class="form-caption hidden">
+    This should be between 3-255 characters. This field is required.
+  </p>
+  <input 
+    id="first-name-input"
+    type="text" 
+    placeholder="John"
+    name="teacherFName" />
+
+  <label for="teacherLName">Last Name</label>
+  <p id="last-name-input-caption" class="form-caption hidden">
+    This should be between 3-255 characters. This field is required.
+  </p>
+  <input 
+    id="last-name-input"
+    type="text" 
+    placeholder="Doe"
+    name="teacherLName" />
+
+  <label for="employeeNumber">Employee Number</label>
+  <p id="employee-number-input-caption" class="form-caption hidden">
+    This follows the pattern T### where # is a digit. This field is required.
+  </p>
+  <input 
+    id="employee-number-input"
+    type="text" 
+    placeholder="T999"
+    name="employeeNumber" />
+
+  <label for="hireDate">Hire Date</label>
+  <p id="hire-date-input-caption" class="form-caption hidden">
+    This field is required.
+  </p>
+  <input 
+    id="hire-date-input"
+    type="date" 
+    name="hireDate" />
+
+  <label for="salary">Salary</label>
+  <p id="salary-input-caption" class="form-caption hidden">
+    This must be a numeric value. This field is required.
+  </p>
+  <input 
+    id="salary-input"
+    type="text" 
+    pattern="[0-9]{1,}\.?[0-9]*"
+    name="salary" />
+
+  <input id="submit-button"type="submit" value="Add" />
+</form>

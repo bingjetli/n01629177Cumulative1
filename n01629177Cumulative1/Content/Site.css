@@ -1,13 +1,67 @@
 ﻿/* Set padding to keep content from hitting the edges */
 .body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+  max-width: 280px;
+}
+
+.h-space-between {
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.v-center {
+  align-content: center;
+}
+
+.full-width {
+  min-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+.danger-link {
+  color: orangered;
+}
+
+  .danger-link:hover {
+    color: orangered;
+  }
+
+.flex-vertical {
+  flex-direction:column;
+}
+
+.vertical-form input {
+  margin-bottom: 1em;
+}
+
+.vertical-form input:last-child {
+  margin-bottom: initial;
+}
+
+.form-caption {
+  font-size: 0.66em;
+  margin: 0;
+  color: #eaa;
+}
+
+.hidden {
+  display: none;
 }
