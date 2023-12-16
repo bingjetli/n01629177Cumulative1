@@ -137,33 +137,15 @@ namespace n01629177Cumulative1.Controllers
       string teacherFName,
       string teacherLName,
       string employeeNumber,
-      string hireDate,
-      string salary
+      DateTime hireDate,
+      Decimal salary
     ){
-      //Server-side validation
-      bool is_valid = true;
-
-      is_valid = Regex.IsMatch(teacherFName, @"[A-z]{3, 255}");
-      is_valid = Regex.IsMatch(teacherLName, @"[A-z]{3, 255}");
-      is_valid = Regex.IsMatch(employeeNumber, @"T[0-9]+");
-      is_valid = Regex.IsMatch(salary, @"[0-9]+\.?[0-9]*");
-
-      DateTime hire_date_parsed;
-      is_valid = DateTime.TryParse(hireDate, out hire_date_parsed);
-
-      Debug.WriteLine("Is the data passed to /Teacher/Create valid? : " + is_valid);
-
-      //If validation fails, then just redirect them back to the List view without
-      //making any changes.
-      if(is_valid == false) return RedirectToAction("List");
-
-      //Proceed with creation if it passes validation.
       Teacher teacher = new Teacher();
       teacher.teacherFName = teacherFName;
       teacher.teacherLName = teacherLName;
       teacher.employeeNumber = employeeNumber;
-      teacher.hireDate = hire_date_parsed;
-      teacher.salary = Decimal.Parse(salary);
+      teacher.hireDate = hireDate;
+      teacher.salary = salary;
 
       TeacherDataController controller = new TeacherDataController();
       controller.CreateTeacher(teacher);
@@ -181,6 +163,34 @@ namespace n01629177Cumulative1.Controllers
       CourseDataController controller = new CourseDataController();
       IEnumerable<Course> courses = controller.ListCourses(teacher_id);
       return PartialView(courses);
+    }
+
+    public ActionResult Update(int teacher_id){
+      TeacherDataController controller = new TeacherDataController();
+      Teacher teacher = controller.FindTeacher(teacher_id);
+      return View(teacher);
+    }
+
+    [HttpPost]
+    public ActionResult Update(
+      int teacher_id,
+      string teacherFName,
+      string teacherLName,
+      string employeeNumber,
+      DateTime hireDate,
+      Decimal salary
+    ){
+      Teacher teacher = new Teacher();
+      teacher.teacherFName = teacherFName;
+      teacher.teacherLName = teacherLName;
+      teacher.employeeNumber = employeeNumber;
+      teacher.hireDate = hireDate;
+      teacher.salary = salary;
+
+      TeacherDataController controller = new TeacherDataController();
+      controller.UpdateTeacher(teacher_id, teacher);
+
+      return RedirectToAction("Show", new {teacher_id = teacher_id});
     }
   }
 }

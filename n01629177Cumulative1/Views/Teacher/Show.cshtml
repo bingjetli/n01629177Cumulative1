@@ -6,7 +6,10 @@
 
 <div class="flex h-space-between v-center">
   <a href="/Teacher/List" class="">Go Back</a>
-  <a href="/Teacher/DeleteConfirm?teacher_id=@Model.teacherId" class="danger-link">Delete</a>
+  <div>
+    <a href="/Teacher/Update?teacher_id=@Model.teacherId" class="">Edit</a>
+    <a href="/Teacher/DeleteConfirm?teacher_id=@Model.teacherId" class="danger-link">Delete</a>
+  </div>
 </div>
 
 <h2>
